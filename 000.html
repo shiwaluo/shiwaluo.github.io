@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>横向滚动时间轴</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .timeline-scroll-container {
+            background-color: #f8f9fa;
+            padding: 3rem 0;
+        }
+        
+        .timeline-scroll {
+            display: flex;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: #0d6efd #f8f9fa;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .timeline-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .timeline-scroll::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+        
+        .timeline-scroll::-webkit-scrollbar-thumb {
+            background-color: #0d6efd;
+            border-radius: 20px;
+        }
+        
+        .cards {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 20px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cards h3 {
+            color: #0d6efd;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .cards h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #0d6efd;
+            border-radius: 50%;
+        }
+        
+        .cards p {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .cards {
+                flex: 0 0 250px;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="timeline-scroll-container">
+        <div class="container">
+            <h2 class="text-center mb-4">发展历程</h2>
+            <div class="timeline-scroll">
+                <div class="cards">
+                    <h3>2008年</h3>
+                    <p>生物医疗<br>为中华骨髓库<br>提供生物样本库<br>解决方案。</p>
+                </div>
+                <div class="cards">
+                    <h3>2011年</h3>
+                    <p>航天冰箱<br>四次搭载<br>神舟飞船进入太空<br>助力国家航天<br>科研事业。</p>
+                </div>
+                <div class="cards">
+                    <h3>2013年</h3>
+                    <p>低温冰箱系列化产品<br>关键技术及产业化项目<br>被授予<br>国家科技进步二等奖</p>
+                </div>
+                <div class="cards">
+                    <h3>2015年</h3>
+                    <p>启动物联网场景方案<br>研发工程</p>
+                </div>
+                <div class="cards">
+                    <h3>2016年</h3>
+                    <p>超低温产品<br>入驻<br>英国生物样本库<br>助力全球尖端生物医疗<br>科研事业。</p>
+                </div>
+                <div class="cards">
+                    <h3>2018年</h3>
+                    <p>血液网场景方案<br>保障上海合作组织<br>青岛峰会<br>期间的临床用血安全。</p>
+                </div>
+                <div class="cards">
+                    <h3>2019年</h3>
+                    <p>在科创板挂牌上市<br>股票代码688139<br>成为物联网科技生态<br>第一股</p>
+                </div>
+                <div class="cards">
+                    <h3>2020年</h3>
+                    <p>抓住新冠疫情<br>迭代生物安全<br>全场景方案<br>向生物安全科技<br>生态转型。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
