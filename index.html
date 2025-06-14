@@ -190,16 +190,14 @@
         
         // B组内容（由绿色按钮控制）
         const groupBImages = [
-            'https://pic4.zhimg.com/v2-d0a4e14a070db68e74ae71a542b1ba2b_r.jpg',
             'https://media.9game.cn/gamebase/2021/6/26/227562089.jpg',
             'https://ts1.tc.mm.bing.net/th/id/R-C.eafa1a435a1c0befdaf840f2cb3972a4?rik=ZPWlhtOgCU7VsQ&riu=http%3a%2f%2fn.sinaimg.cn%2f97973%2ftransform%2f20170515%2fvCyg-fyfeutp9771821.jpg&ehk=PCgHK4RFv3KL2VBRpK04ojqcYz9oFPXIYLtJQ5Ww0aM%3d&risl=&pid=ImgRaw&r=0'
         ];
         
         const groupBTexts = [
-			'【掉分车队】出发！',
-			'ok啊，好兄弟在心中',
-			'喵喵喵！'
-            
+            '【掉分车队】出发！',
+            'ok啊，好兄弟在心中',
+            '喵喵喵！'
         ];
         
         let currentGroupAIndex = 0;
@@ -208,6 +206,9 @@
         
         // "让按钮变大"按钮 - 替换B组内容
         growBtn.addEventListener('click', function() {
+            // 隐藏第二个按钮
+            changeBtn.style.display = 'none';
+            
             // 更新B组内容
             currentGroupBIndex = (currentGroupBIndex + 1) % groupBImages.length;
             mainImage.src = groupBImages[currentGroupBIndex];
