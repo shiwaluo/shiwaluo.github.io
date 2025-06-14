@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全屏粉色渐变交互网页</title>
+    <style>
+        /* 基础样式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            /* 粉色渐变背景 */
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+        }
+        
+        /* 背景动画 */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            margin: 30px 0;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .image-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .image-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .text-content {
+            margin: 30px 0;
+            color: #fff;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            background-color: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: rgba(255,255,255,0.9);
+            color: #ff6b88;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.9);
+            color: #5d9cec;
+            font-weight: bold;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .text-content {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>王者荣耀</h1>
+    
+    <div class="content">
+        <div class="image-container">
+            <img id="mainImage" src="img/v2-0390f4f5a40dffc76226ab8893244813_720w.jpg" alt="示例图片">
+        </div>
+        
+        <p class="text-content" id="mainText">
+            兄弟，兄弟想不想和我玩王者荣耀<br>
+           喵喵喵！！！
+        </p>
+    </div>
+    
+    <div class="button-group">
+        <button class="btn btn-primary" id="growBtn">包的兄弟！</button>
+        <button class="btn btn-secondary" id="changeBtn">不可能，绝对不可能</button>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const growBtn = document.getElementById('growBtn');
+        const changeBtn = document.getElementById('changeBtn');
+        const mainImage = document.getElementById('mainImage');
+        const mainText = document.getElementById('mainText');
+        
+        // A组内容（由蓝色按钮控制）
+        const groupAImages = [
+            'https://tse3-mm.cn.bing.net/th/id/OIP-C.FbC0iGbwYvJ_P4e967AYEwHaJA?rs=1&pid=ImgDetMain&cb=idpwebp1&o=7&rm=3',
+            'https://tse2-mm.cn.bing.net/th/id/OIP-C.cpNA1xpWyG8npy7eKf894AAAAA?rs=1&pid=ImgDetMain&cb=idpwebp1&o=7&rm=3',
+            'https://img.taotu.cn/ssd/ssd4/1/2024-07-27/1_643666dbfc6cf637bfef6863211c8626.webp'
+        ];
+        
+        const groupATexts = [
+            '劝你好好想想',
+            '我再给你一次机会',
+            '大胆，我允许你不同意了？'
+        ];
+        
+        // B组内容（由绿色按钮控制）
+        const groupBImages = [
+            'img/20210630000008_1f042.jpg',
+            'img/R-C.jpg',
+            'img/227562089.jpg'
+        ];
+        
+        const groupBTexts = [
+			'【掉分车队】出发！',
+			'ok啊，好兄弟在心中',
+			'喵喵喵！'
+            
+        ];
+        
+        let currentGroupAIndex = 0;
+        let currentGroupBIndex = 0;
+        let scaleFactor = 1;
+        
+        // "让按钮变大"按钮 - 替换B组内容
+        growBtn.addEventListener('click', function() {
+            // 更新B组内容
+            currentGroupBIndex = (currentGroupBIndex + 1) % groupBImages.length;
+            mainImage.src = groupBImages[currentGroupBIndex];
+            mainText.textContent = groupBTexts[currentGroupBIndex];
+            
+            // 添加动画效果
+            animateContent();
+        });
+        
+        // "替换内容"按钮 - 使绿色按钮变大并替换A组内容
+        changeBtn.addEventListener('click', function() {
+            // 指数级增加绿色按钮大小
+            scaleFactor *= 1.3;
+            growBtn.style.padding = `${12 * scaleFactor}px ${25 * scaleFactor}px`;
+            growBtn.style.fontSize = `${1.1 * scaleFactor}rem`;
+            
+            // 更新A组内容
+            currentGroupAIndex = (currentGroupAIndex + 1) % groupAImages.length;
+            mainImage.src = groupAImages[currentGroupAIndex];
+            mainText.textContent = groupATexts[currentGroupAIndex];
+            
+            // 添加动画效果
+            animateContent();
+        });
+        
+        // 内容动画函数
+        function animateContent() {
+            mainImage.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                mainImage.style.transform = 'scale(1)';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
